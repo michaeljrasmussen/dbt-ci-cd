@@ -26,11 +26,9 @@ jobs:
         run: pwd
              ls -R
 
-      - name: Set working directory
-        working-directory: ./dbt_project
-
       - name: Install dbt dependencies
         run: dbt deps
+        working-directory: ./dbt_project
 
       - name: Run lint check
         run: sqlfluff lint models --dialect snowflake
