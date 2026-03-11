@@ -14,6 +14,10 @@ env:
 jobs:
   dbt_ci:
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./dbt_project
 
     steps:
       - name: Checkout Code
@@ -28,7 +32,7 @@ jobs:
 
       - name: Install dbt dependencies
         run: dbt deps
-        working-directory: ./dbt_project
+        #working-directory: ./dbt_project
 
       - name: Run lint check
         run: sqlfluff lint models --dialect snowflake
