@@ -24,15 +24,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install requirements
-        run: pip install dbt-core dbt-snowflake sqlfluff
+        #run: pip install dbt-core dbt-snowflake sqlfluff
+        run: pip install -r requirements.txt
 
       - name: Debug working directory and files
         run: pwd
              ls -R
 
+      - name: Check connection to Snowflake
+        run: dbt debug --profiles-dir ./
+      
       - name: Install dbt dependencies
         run: dbt deps
-        #working-directory: ./dbt_project
 
       - name: Run lint check
         run: sqlfluff lint models --dialect snowflake
